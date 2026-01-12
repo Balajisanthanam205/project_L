@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/orbitron/400.css';
+@import '@fontsource/orbitron/500.css';
+@import '@fontsource/orbitron/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+
+/* Loki Season 2 Theme - Green, Purple, Black */
+@layer base {
+  :root {
+    /* Core Loki Theme */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 95%;
+
+    /* Green - #00E100 → HSL(120, 100%, 44%) */
+    --primary: 120 100% 44%;
+    --primary-foreground: 0 0% 0%;
+
+    /* Purple - #8805be → HSL(280, 96%, 38%) */
+    --secondary: 280 96% 38%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 280 96% 38%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 10%;
+    --ring: 120 100% 44%;
+
+    --radius: 0.5rem;
+
+    /* Loki Theme Colors */
+    --loki-green: 120 100% 44%;
+    --loki-purple: 280 96% 38%;
+    --loki-black: 0 0% 0%;
+    --loki-dark: 0 0% 5%;
+
+    /* Glassmorphism */
+    --glass-bg: hsl(0 0% 5% / 0.8);
+    --glass-border: hsl(120 100% 44% / 0.15);
+    --glass-blur: blur(20px);
+
+    /* Shadows */
+    --shadow-glow-green: 0 0 30px hsl(120 100% 44% / 0.2);
+    --shadow-glow-purple: 0 0 30px hsl(280 96% 38% / 0.2);
+
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 120 100% 44%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 120 100% 44%;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 95%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply relative overflow-hidden rounded-lg;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Glow Effects - Subtle */
+  .glow-green {
+    box-shadow: var(--shadow-glow-green);
+  }
+
+  .glow-purple {
+    box-shadow: var(--shadow-glow-purple);
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 15px hsl(120 100% 44% / 0.4);
+  }
+
+  .text-glow-purple {
+    text-shadow: 0 0 15px hsl(280 96% 38% / 0.4);
+  }
+
+  /* Hexagon Shape */
+  .hexagon {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  /* Timeline Line */
+  .timeline-line {
+    @apply absolute left-1/2 -translate-x-1/2 w-0.5;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      hsl(120 100% 44%),
+      hsl(280 96% 38%),
+      transparent
+    );
+  }
+
+  /* Floating Animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  /* Pulse Glow - Subtle */
+  .pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0 0% 5%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(120 100% 44%), hsl(280 96% 38%));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(120 100% 50%), hsl(280 96% 45%));
+}
