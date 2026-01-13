@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 // Easy to change hero images - just update these imports
-import heroBack from "@/assets/hero-multiverse.jpg";
-import heroFront from "@/assets/event-expo.jpg";
+import heroBack from "@/assets/TVA.png";
+import heroFront from "@/assets/space-hel.png";
 
 // ========== EASY ADJUSTMENTS ==========
 const CURSOR_RADIUS = 120; // Adjust cursor reveal radius here (in pixels)
@@ -141,11 +141,11 @@ const Hero = () => {
           ref={cursorRef}
           className={`fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-300 liquid-cursor`}
           style={{
-            width: CURSOR_RADIUS * 2,
-            height: CURSOR_RADIUS * 2,
+            width: CURSOR_RADIUS * 0.5,
+            height: CURSOR_RADIUS * 0.5,
             background: cursorColor === 'green' 
-              ? "radial-gradient(circle, hsl(136 100% 50% / 0.3) 0%, hsl(136 100% 50% / 0.1) 40%, transparent 70%)"
-              : "radial-gradient(circle, hsl(280 99% 54% / 0.3) 0%, hsl(280 99% 54% / 0.1) 40%, transparent 70%)",
+              ? "radial-gradient(circle, hsl(136 100% 50% / 0.3) 0%, hsl(136 100% 50% / 0.1) 40%, transparent 100%)"
+              : "radial-gradient(circle, hsl(280 99% 54% / 0.3) 0%, hsl(280 99% 54% / 0.1) 40%, transparent 100%)",
             boxShadow: cursorColor === 'green'
               ? "0 0 30px hsl(136 100% 50% / 0.4)"
               : "0 0 30px hsl(280 99% 54% / 0.4)",
