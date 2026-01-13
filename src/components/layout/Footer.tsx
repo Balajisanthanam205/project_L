@@ -6,11 +6,11 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-card border-t border-border overflow-hidden">
+    <footer className="relative bg-card/50 border-t border-border/30 overflow-hidden backdrop-blur-sm">
       {/* Subtle decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/3 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-secondary/3 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
@@ -32,7 +32,7 @@ const Footer = () => {
                   key={index}
                   href="#"
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                  className="glass-card w-10 h-10 flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Icon size={18} />
                 </motion.a>
@@ -86,13 +86,13 @@ const Footer = () => {
             <h4 className="font-heading font-semibold text-foreground mb-4 tracking-wider">Contact Us</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin size={18} className="text-primary mt-0.5 flex-shrink-0" />
+                <MapPin size={18} className="text-primary/70 mt-0.5 flex-shrink-0" />
                 <span className="text-muted-foreground text-sm">
                   ECE Department, University Campus, Kanpur - 208024
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail size={18} className="text-primary flex-shrink-0" />
+                <Mail size={18} className="text-primary/70 flex-shrink-0" />
                 <a
                   href="mailto:upagraha@university.edu"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
@@ -101,7 +101,7 @@ const Footer = () => {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Phone size={18} className="text-primary flex-shrink-0" />
+                <Phone size={18} className="text-primary/70 flex-shrink-0" />
                 <a
                   href="tel:+919876543210"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
@@ -114,7 +114,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-12 pt-8 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
             © {currentYear} UPAGRAHA. All rights reserved.
           </p>

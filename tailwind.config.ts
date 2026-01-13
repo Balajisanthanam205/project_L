@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["Orbitron", "sans-serif"],
-        body: ["Inter", "sans-serif"],
+        heading: ["Cinzel", "serif"],
+        cyber: ["Michroma", "sans-serif"],
+        body: ["Rajdhani", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,12 +52,17 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Loki Theme Colors
+        // Loki Theme Colors - Neon
         loki: {
           green: "hsl(var(--loki-green))",
           purple: "hsl(var(--loki-purple))",
           black: "hsl(var(--loki-black))",
           dark: "hsl(var(--loki-dark))",
+        },
+        // Neon colors for direct use
+        neon: {
+          green: "hsl(136 100% 50%)",
+          purple: "hsl(280 99% 54%)",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

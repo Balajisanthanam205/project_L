@@ -22,7 +22,7 @@ const Timeline = () => {
     <section ref={ref} id="timeline" className="py-24 relative overflow-hidden">
       {/* Background - subtle */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[120px]" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -31,7 +31,7 @@ const Timeline = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="text-center mb-16"
         >
-          <span className="text-primary font-medium text-sm uppercase tracking-widest">
+          <span className="text-primary/80 font-medium text-sm uppercase tracking-widest">
             Interactive Timeline
           </span>
           <h2 className="font-heading text-3xl md:text-5xl font-bold mt-4 mb-4 tracking-wide">
@@ -52,9 +52,9 @@ const Timeline = () => {
             initial={{ scaleY: 0 }}
             animate={isInView ? { scaleY: 1 } : {}}
             transition={{ duration: 1.5 }}
-            className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 origin-top hidden md:block"
+            className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 origin-top hidden md:block"
             style={{
-              background: "linear-gradient(180deg, transparent, hsl(120 100% 44%), hsl(280 96% 38%), transparent)",
+              background: "linear-gradient(180deg, transparent, hsl(120 70% 38% / 0.5), hsl(280 80% 42% / 0.5), transparent)",
             }}
           />
 
@@ -79,11 +79,11 @@ const Timeline = () => {
                     <Link to={`/events/${event.slug}`}>
                       <motion.div
                         whileHover={{ scale: 1.02, y: -5 }}
-                        className="glass-card p-6 group cursor-pointer transition-all duration-300 hover:border-primary/30"
+                        className="glass-card p-6 group cursor-pointer"
                       >
                         <div className="flex items-start gap-4">
-                          <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                            <Icon className="w-6 h-6 text-primary" />
+                          <div className="w-12 h-12 rounded-xl glass-card flex items-center justify-center flex-shrink-0 neon-border-green group-hover:neon-border-purple transition-all">
+                            <Icon className="w-6 h-6 text-primary group-hover:text-secondary transition-colors" />
                           </div>
                           <div className="flex-1">
                             <h3 className="font-heading text-lg font-semibold text-foreground group-hover:text-primary transition-colors tracking-wide">
@@ -95,7 +95,7 @@ const Timeline = () => {
                             <p className="text-sm text-muted-foreground line-clamp-2">
                               {event.description}
                             </p>
-                            <div className="mt-3 flex items-center text-primary text-sm font-medium group-hover:gap-2 transition-all">
+                            <div className="mt-3 flex items-center text-primary/80 text-sm font-medium group-hover:gap-2 transition-all">
                               <span>Enter Universe</span>
                               <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                             </div>
@@ -108,14 +108,14 @@ const Timeline = () => {
                   {/* Center node */}
                   <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-10">
                     <motion.div
-                      whileHover={{ scale: 1.2 }}
-                      className={`w-5 h-5 rounded-full border-4 border-background ${
+                      whileHover={{ scale: 1.3 }}
+                      className={`w-4 h-4 rounded-full border-2 border-background ${
                         index % 2 === 0 ? 'bg-primary' : 'bg-secondary'
                       }`}
                       style={{
                         boxShadow: index % 2 === 0 
-                          ? '0 0 10px hsl(120 100% 44% / 0.3)' 
-                          : '0 0 10px hsl(280 96% 38% / 0.3)'
+                          ? '0 0 15px hsl(120 70% 38% / 0.4)' 
+                          : '0 0 15px hsl(280 80% 42% / 0.4)'
                       }}
                     />
                   </div>

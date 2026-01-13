@@ -16,9 +16,9 @@ const About = () => {
 
   return (
     <section ref={ref} className="py-24 relative overflow-hidden" id="about">
-      {/* Background decoration - subtle */}
-      <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary/3 rounded-full blur-3xl -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-secondary/3 rounded-full blur-3xl" />
+      {/* Background decoration - very subtle */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/3 rounded-full blur-[100px] -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/3 rounded-full blur-[100px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
@@ -26,7 +26,7 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-primary font-medium text-sm uppercase tracking-widest"
+            className="text-primary/80 font-medium text-sm uppercase tracking-widest"
           >
             About the Event
           </motion.span>
@@ -45,7 +45,7 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-muted-foreground text-lg"
+            className="text-muted-foreground text-lg leading-relaxed"
           >
             UPAGRAHA'26 isn't just an event—it's a journey through the multiverse of technology. 
             Each event represents a unique universe with its own challenges, aesthetics, and possibilities. 
@@ -62,11 +62,11 @@ const About = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              className="glass-card p-6 text-center group hover:border-primary/30 transition-all duration-300"
+              className="glass-card p-6 text-center group"
             >
               <motion.div
                 whileHover={{ scale: 1.1 }}
-                className="w-14 h-14 mx-auto mb-4 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center"
+                className="w-14 h-14 mx-auto mb-4 rounded-xl glass-card flex items-center justify-center neon-border-green"
               >
                 <stat.icon className="w-7 h-7 text-primary" />
               </motion.div>
@@ -84,17 +84,17 @@ const About = () => {
             {
               title: "Innovation Hub",
               description: "Present your research and projects to industry experts and academicians.",
-              color: "primary",
+              accent: "primary",
             },
             {
               title: "Hands-on Challenges",
               description: "Build circuits, hunt for treasures, and hack solutions in intense competitions.",
-              color: "secondary",
+              accent: "secondary",
             },
             {
               title: "Network & Learn",
               description: "Connect with fellow explorers, attend workshops, and expand your knowledge.",
-              color: "primary",
+              accent: "primary",
             },
           ].map((feature, index) => (
             <motion.div
@@ -102,13 +102,17 @@ const About = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-              className="glass-card p-8 group hover:border-primary/30 transition-all duration-300"
+              className="glass-card p-8 group"
             >
-              <div className={`w-full h-0.5 rounded-full bg-${feature.color} mb-6 opacity-50`} />
+              <div 
+                className={`w-full h-0.5 rounded-full mb-6 opacity-40 ${
+                  feature.accent === 'primary' ? 'bg-primary' : 'bg-secondary'
+                }`} 
+              />
               <h3 className="font-heading text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors tracking-wide">
                 {feature.title}
               </h3>
-              <p className="text-muted-foreground">{feature.description}</p>
+              <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>
