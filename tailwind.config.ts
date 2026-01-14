@@ -17,8 +17,19 @@ export default {
         heading: ["Cinzel", "serif"],
         cyber: ["Michroma", "sans-serif"],
         body: ["Rajdhani", "sans-serif"],
+        pixel: ["monospace"], // Fallback for transferred components
       },
       colors: {
+        retro: {
+          black: "#0a0a0a",
+          dark: "#1a1a1a",
+          green: "#00ff00",
+          pink: "#ff00ff",
+          cyan: "#00ffff",
+          yellow: "#ffff00",
+          red: "#ff0000",
+          blue: "#0000aa",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
