@@ -7,18 +7,14 @@ import HexagonalGallery from "@/components/home/HexagonalGallery";
 import SponsorsPreview from "@/components/home/SponsorsPreview";
 import PrizesPreview from "@/components/home/PrizesPreview";
 import Contact from "@/components/home/Contact";
-import VideoIntro from "@/components/ui/VideoIntro";
-import { useGameStore } from "@/store/gameStore";
-import { AnimatePresence } from "framer-motion";
+
 
 const Index = () => {
-  const showIntro = useGameStore((state) => state.showIntro);
+
 
   return (
     <Layout>
-      <AnimatePresence>
-        {showIntro && <VideoIntro key="intro" />}
-      </AnimatePresence>
+
       <Hero />
       <About />
       <Timeline />
