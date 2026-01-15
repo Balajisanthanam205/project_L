@@ -1,25 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
-// Easy to change hero images - just update these imports
-import heroBack from "@/assets/TVA.png";
-import heroFront from "@/assets/space-hel.png";
-
 // ========== EASY ADJUSTMENTS ==========
-const CURSOR_RADIUS = 120; // Adjust cursor reveal radius here (in pixels)
+export const HERO_CURSOR_RADIUS = 120; // Radius of the reveal circle in pixels
 // ======================================
+
+// Hero images - easy to change
+import heroBack from "@/assets/TVA.svg";
+import heroFront from "@/assets/space-hel.svg";
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const frontRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [cursorColor, setCursorColor] = useState<'green' | 'purple'>('green');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [cursorVisible, setCursorVisible] = useState(false);
 
-  // Countdown timer
+  // Countdown timer - TARGET DATE: 19th Feb 2026
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -30,7 +29,7 @@ const Hero = () => {
   useEffect(() => {
     setIsLoaded(true);
     
-    const targetDate = new Date("2026-03-15T00:00:00").getTime();
+    const targetDate = new Date("2026-02-19T00:00:00").getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -61,25 +60,7 @@ const Hero = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Interactive element detection for cursor color change
-  useEffect(() => {
-    const checkInteractive = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const isInteractive = 
-        target.tagName === 'BUTTON' || 
-        target.tagName === 'A' ||
-        target.closest('button') ||
-        target.closest('a') ||
-        target.classList.contains('interactive');
-      
-      setCursorColor(isInteractive ? 'purple' : 'green');
-    };
-
-    window.addEventListener('mouseover', checkInteractive);
-    return () => window.removeEventListener('mouseover', checkInteractive);
-  }, []);
-
-  // Mouse tracking for cursor reveal
+  // Mouse tracking for cursor reveal and custom cursor
   useEffect(() => {
     if (isMobile) return;
 
@@ -94,7 +75,7 @@ const Hero = () => {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Update mask position using CSS custom properties
+      // Update mask position
       front.style.setProperty("--x", `${x}px`);
       front.style.setProperty("--y", `${y}px`);
 
@@ -103,19 +84,8 @@ const Hero = () => {
       cursor.style.top = `${e.clientY}px`;
     };
 
-    const handleMouseEnter = () => {
-      if (cursorRef.current) {
-        cursorRef.current.classList.remove("opacity-0");
-        cursorRef.current.classList.add("opacity-100");
-      }
-    };
-
-    const handleMouseLeave = () => {
-      if (cursorRef.current) {
-        cursorRef.current.classList.remove("opacity-100");
-        cursorRef.current.classList.add("opacity-0");
-      }
-    };
+    const handleMouseEnter = () => setCursorVisible(true);
+    const handleMouseLeave = () => setCursorVisible(false);
 
     const hero = heroRef.current;
     if (hero) {
@@ -133,60 +103,74 @@ const Hero = () => {
     };
   }, [isMobile]);
 
+  // Scroll to section handler
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
-      {/* Custom Cursor - Shows outside hero too for color changes */}
+      {/* Custom Cursor - Green gemstone with reveal radius indicator */}
       {!isMobile && (
         <div
           ref={cursorRef}
-          className={`fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-300 liquid-cursor`}
+          className={`fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}
           style={{
-            width: CURSOR_RADIUS * 0.5,
-            height: CURSOR_RADIUS * 0.5,
-            background: cursorColor === 'green' 
-              ? "radial-gradient(circle, hsl(136 100% 50% / 0.3) 0%, hsl(136 100% 50% / 0.1) 40%, transparent 100%)"
-              : "radial-gradient(circle, hsl(280 99% 54% / 0.3) 0%, hsl(280 99% 54% / 0.1) 40%, transparent 100%)",
-            boxShadow: cursorColor === 'green'
-              ? "0 0 30px hsl(136 100% 50% / 0.4)"
-              : "0 0 30px hsl(280 99% 54% / 0.4)",
+            left: '-100px',
+            top: '-100px',
           }}
-        />
+        >
+          {/* Green gemstone center */}
+          <div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{
+              width: 16,
+              height: 16,
+              background: "radial-gradient(circle at 30% 30%, hsl(136 100% 70%), hsl(136 100% 50%) 50%, hsl(136 100% 30%))",
+              boxShadow: "0 0 15px hsl(136 100% 50% / 0.8), 0 0 30px hsl(136 100% 50% / 0.5), inset 0 0 5px hsl(136 100% 80%)",
+            }}
+          />
+        </div>
       )}
 
       <section
         ref={heroRef}
+        id="home"
         className="relative min-h-screen overflow-hidden cursor-none"
       >
-        {/* Back Image (revealed on hover) */}
+        {/* Back Image (revealed on hover) - This is what shows THROUGH the cursor hole */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroBack})` }}
         />
 
-        {/* Front Image (with mask) */}
+        {/* Front Image (with mask hole) - Fade effect on edges */}
         <div
           ref={frontRef}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-[mask-position] duration-75"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url(${heroFront})`,
-            maskImage: `radial-gradient(circle ${CURSOR_RADIUS}px at var(--x, -200px) var(--y, -200px), transparent 0%, black 100%)`,
-            WebkitMaskImage: `radial-gradient(circle ${CURSOR_RADIUS}px at var(--x, -200px) var(--y, -200px), transparent 0%, black 100%)`,
+            maskImage: `radial-gradient(circle ${HERO_CURSOR_RADIUS}px at var(--x, -200px) var(--y, -200px), transparent 0%, transparent 60%, rgba(0,0,0,0.3) 75%, rgba(0,0,0,0.7) 85%, black 100%)`,
+            WebkitMaskImage: `radial-gradient(circle ${HERO_CURSOR_RADIUS}px at var(--x, -200px) var(--y, -200px), transparent 0%, transparent 60%, rgba(0,0,0,0.3) 75%, rgba(0,0,0,0.7) 85%, black 100%)`,
           }}
         />
 
         {/* Overlay gradient for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background" />
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
-          {/* Logo */}
+          {/* Logo - Main visual element replacing UPAGRAHA text */}
           <motion.img
             src={logo}
             alt="UPAGRAHA Logo"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.8 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-32 h-32 md:w-40 md:h-40 mb-6 object-contain"
+            className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 mb-6 object-contain drop-shadow-[0_0_30px_hsl(136_100%_50%/0.5)]"
           />
 
           {/* Department */}
@@ -199,22 +183,11 @@ const Hero = () => {
             Electronics & Communication Engineering
           </motion.p>
 
-          {/* Main Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4"
-          >
-            <span className="text-primary text-glow-green">UPAGRAHA</span>
-            <span className="text-secondary">'26</span>
-          </motion.h1>
-
           {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
             className="text-lg md:text-xl text-muted-foreground mb-2"
           >
             National Level Technical Symposium
@@ -224,17 +197,17 @@ const Hero = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="font-cyber text-xs tracking-wider text-primary/70 mb-10"
           >
-            MARCH 2026 • SVCE, CHENNAI
+            19TH FEBRUARY 2026 • SVCE, CHENNAI
           </motion.p>
 
           {/* Countdown Timer */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
             className="flex gap-4 md:gap-6 mb-8"
           >
             {[
@@ -261,21 +234,21 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Link
-              to="/events"
+            <button
+              onClick={() => scrollToSection('events')}
               className="interactive px-8 py-3 bg-primary text-primary-foreground font-bold rounded-lg hover:shadow-[0_0_20px_hsl(136_100%_50%/0.5)] transition-all duration-300 font-cyber text-sm"
             >
               Register Now
-            </Link>
-            <Link
-              to="/events"
+            </button>
+            <button
+              onClick={() => scrollToSection('events')}
               className="interactive px-8 py-3 border border-primary/50 text-primary font-bold rounded-lg hover:bg-primary/10 hover:border-primary transition-all duration-300 font-cyber text-sm"
             >
               Explore Events
-            </Link>
+            </button>
           </motion.div>
 
           {/* Mobile touch hint */}
@@ -297,7 +270,7 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
+          transition={{ delay: 1 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
           <span className="font-cyber text-[10px] text-muted-foreground tracking-widest">
