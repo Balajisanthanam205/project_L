@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // ========== EASY ADJUSTMENTS ==========
-export const CURSOR_RADIUS = 150; // Adjust cursor radius here (in pixels)
+export const CURSOR_RADIUS = 8; // Small dot radius (in pixels)
 // ======================================
 
 const GlobalCursor = () => {
@@ -72,19 +72,16 @@ const GlobalCursor = () => {
   return (
     <div
       ref={cursorRef}
-      className={`fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 rounded-full transition-[background,box-shadow] duration-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      className={`fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors duration-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
       style={{
         width: CURSOR_RADIUS * 2,
         height: CURSOR_RADIUS * 2,
-        border: cursorColor === 'green' 
-          ? "2px solid hsl(136 100% 50% / 0.6)"
-          : "2px solid hsl(280 99% 54% / 0.6)",
         background: cursorColor === 'green' 
-          ? "radial-gradient(circle, hsl(136 100% 50% / 0.15) 0%, transparent 70%)"
-          : "radial-gradient(circle, hsl(280 99% 54% / 0.15) 0%, transparent 70%)",
+          ? "hsl(136 100% 50%)"
+          : "hsl(280 99% 54%)",
         boxShadow: cursorColor === 'green'
-          ? "0 0 40px hsl(136 100% 50% / 0.3), inset 0 0 30px hsl(136 100% 50% / 0.1)"
-          : "0 0 40px hsl(280 99% 54% / 0.3), inset 0 0 30px hsl(280 99% 54% / 0.1)",
+          ? "0 0 10px hsl(136 100% 50% / 0.8), 0 0 20px hsl(136 100% 50% / 0.4)"
+          : "0 0 10px hsl(280 99% 54% / 0.8), 0 0 20px hsl(280 99% 54% / 0.4)",
       }}
     />
   );
