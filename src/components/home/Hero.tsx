@@ -7,8 +7,8 @@ export const HERO_CURSOR_RADIUS = 120; // Radius of the reveal circle in pixels
 // ======================================
 
 // Hero images - easy to change
-import heroBack from "@/assets/hero-multiverse.jpg";
-import heroFront from "@/assets/event-expo.jpg";
+import heroBack from "@/assets/TVA.svg";
+import heroFront from "@/assets/space-hel.svg";
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
