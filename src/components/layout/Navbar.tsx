@@ -83,11 +83,8 @@ const Navbar = () => {
             <img 
               src={logo} 
               alt="UPAGRAHA" 
-              className="w-10 h-10 md:w-12 md:h-12 object-contain drop-shadow-[0_0_10px_hsl(136_100%_50%/0.5)]"
+              className="w-12 h-12 md:w-14 md:h-14 object-contain drop-shadow-[0_0_10px_hsl(136_100%_50%/0.5)]"
             />
-            <span className="font-heading text-xl text-white font-bold tracking-[2px] hidden sm:block">
-              UPAGRAHA
-            </span>
           </button>
 
           {/* Desktop Navigation */}

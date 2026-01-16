@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
 
 // ========== EASY ADJUSTMENTS ==========
-export const HERO_CURSOR_RADIUS = 100; // Radius of the reveal circle in pixels
+export const HERO_CURSOR_RADIUS = 120; // Radius of the reveal circle in pixels
 // ======================================
 
 // Hero images - easy to change
-import heroBack from "@/assets/TVA.svg";
-import heroFront from "@/assets/space-hel.svg";
+import heroBack from "@/assets/hero-multiverse.jpg";
+import heroFront from "@/assets/event-expo.jpg";
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -170,7 +170,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.8 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 mb-6 object-contain drop-shadow-[0_0_30px_hsl(136_100%_50%/0.5)]"
+            className="w-56 h-56 md:w-72 md:h-72 lg:w-96 lg:h-96 mb-6 object-contain drop-shadow-[0_0_30px_hsl(136_100%_50%/0.5)]"
           />
 
           {/* Department */}

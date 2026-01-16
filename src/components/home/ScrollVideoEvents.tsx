@@ -7,8 +7,8 @@ import { useFramePreloader } from "@/hooks/useFramePreloader";
 
 // ========== EASY ADJUSTMENTS ==========
 const CONFIG = {
-  circleRadius: 180,       // Radius for circular button layout
-  circleRadiusMobile: 120, // Radius on mobile
+  circleRadius: 200,       // Radius for circular button layout
+  circleRadiusMobile: 140, // Radius on mobile
 };
 // ======================================
 
